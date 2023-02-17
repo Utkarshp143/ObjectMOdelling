@@ -4,11 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Comparable<User> {
    
     private final String name;
     private final Integer score;
     private List <Contest> contests;
+    private UserContestQuestions userContestQuestions;
+
+    public User(User user){
+        this(user.id,user.name,user.score,user.contests);
+        userContestQuestions = user.userContestQuestions;
+    }
+
+    public User(String id, String name, Integer score, List<Contest> contests) {
+        this(id,name,score);
+        this.contests = contests;
+    }
+
+    public User(String id, String name, Integer score) {
+        this(name,score);
+        this.id = id;
+        this.userContestQuestions = new UserContestQuestions();
+    }
 
     public User(String name, Integer score) {
         this.name = name;
@@ -34,6 +51,24 @@ public class User extends BaseEntity {
 
     public List<Contest> getContests() {
         return contests.stream().collect(Collectors.toList());
+    }
+
+    // TODO: CRIO_TASK_MODULE_SERVICES
+    // Check if Contest is present in the User or Not
+
+    public boolean checkIfContestExists(Contest contest){
+        if(this.getContests().contains(contest)){
+            return true;
+        }
+        return false;
+    }
+
+    public void addContestQuestion(Contest contest, List<Question> qList){
+        userContestQuestions.addContestQuestion(contest, qList);
+    }
+
+    public List<Question> getQuestionsByContest(Contest contest){
+        return userContestQuestions.getQuestionsByContest(contest);
     }
 
     @Override
@@ -65,6 +100,13 @@ public class User extends BaseEntity {
     @Override
     public String toString() {
         return "User [id=" + id + ", contests=" + contests + ", name=" + name + ", score=" + score + "]";
+    }
+
+    @Override
+    public int compareTo(User arg0) {
+
+        // TODO Auto-generated method stub
+        return this.getScore() - arg0.getScore();
     }
     
     
