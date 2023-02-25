@@ -17,6 +17,7 @@ public class ContestRepository implements IContestRepository {
     private Integer autoIncrement = 0;
 
     
+    
     public ContestRepository() {
         contestMap = new HashMap<String,Contest>();
     }
@@ -72,8 +73,7 @@ public class ContestRepository implements IContestRepository {
     }
 
     @Override
-    public long count() 
-    {
+    public long count() {
         // TODO Auto-generated method stub
         return 0;
     }

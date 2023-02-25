@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class User extends BaseEntity implements Comparable<User> {
+public class User extends BaseEntity implements Comparable<User>{
    
     private final String name;
     private final Integer score;

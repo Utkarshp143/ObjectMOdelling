@@ -104,6 +104,9 @@ public class UserService implements IUserService {
         user.deleteContest(contest);
         userRepository.save(user);
         return new UserRegistrationDto(contest.getName(),user.getName(),RegisterationStatus.NOT_REGISTERED); 
-    }
+
+    // @Override
+    // public UserRegistrationDto withdrawContest(String contestId, String userName) throws ContestNotFoundException, UserNotFoundException, InvalidOperationException {
+    // }
     
 }
