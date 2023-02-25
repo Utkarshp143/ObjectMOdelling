@@ -109,4 +109,5 @@ public class UserService implements IUserService {
     // public UserRegistrationDto withdrawContest(String contestId, String userName) throws ContestNotFoundException, UserNotFoundException, InvalidOperationException {
     // }
     
+    }
 }
