@@ -25,7 +25,7 @@ public class PlaySongCommand implements ICommand
         
         if(commandName.equals("PLAY-SONG"))
         {
-            String playlistId = tokens.get(2);
+            String userId = tokens.get(1);
             
             PlayList playlist = playlistRepository.findById().get();
             List<Song> songList = playlist.getSongs();
@@ -35,7 +35,7 @@ public class PlaySongCommand implements ICommand
                 Song song = songList.get(0);
                 String songId = song.getId();
 
-                PlaylistRepository.setPlayingPlaylistId(playlistId);
+                // PlaylistRepository.setPlayingPlaylistId(playlistId);
                 songRepository.setPlayingSongId(songId);
 
 
@@ -48,7 +48,7 @@ public class PlaySongCommand implements ICommand
             }
             else
             {
-                System.out.println("Something went wrong with Playlist!");
+                System.out.println("Something went wrong with Song!");
             }
         }
     }
