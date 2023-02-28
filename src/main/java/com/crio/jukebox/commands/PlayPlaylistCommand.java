@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.crio.jukebox.entities.Song;
 import com.crio.jukebox.entities.PlayList;
 import com.crio.jukebox.repositories.ISongRepository;
+import com.crio.jukebox.repositories.PlaylistRepository;
 import com.crio.jukebox.repositories.IPlaylistRepository;
 
 public class PlayPlaylistCommand implements ICommand
@@ -26,7 +27,7 @@ public class PlayPlaylistCommand implements ICommand
         {
             String playlistId = tokens.get(2);
             
-            PlayList playlist = playlistRepository.findById().get();
+            PlayList playlist = playlistRepository.findById(playlistId).get();
             List<Song> songList = playlist.getSongs();
 
             if(songList.size() != 0)
@@ -34,12 +35,12 @@ public class PlayPlaylistCommand implements ICommand
                 Song song = songList.get(0);
                 String songId = song.getId();
 
-                PlaylistRepository.setPlayingPlaylistId(playlistId);
+                playlistRepository.setPlayingPlaylistId(playlistId);
                 songRepository.setPlayingSongId(songId);
 
 
                 System.out.println("Current song playing");
-                System.out.println("SongName: "+song.getName());
+                System.out.println("SongName: "+song.getSongName());
                 System.out.println("AlbumName: "+song.getAlbumName());
                 System.out.println("ArtistName: "+song.getAlbumArtistToString());
 

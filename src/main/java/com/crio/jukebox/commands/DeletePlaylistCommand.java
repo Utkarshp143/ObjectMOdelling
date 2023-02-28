@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.crio.jukebox.entities.Song;
 import com.crio.jukebox.entities.PlayList;
 import com.crio.jukebox.repositories.ISongRepository;
+import com.crio.jukebox.services.IPlaylistService;
 import com.crio.jukebox.repositories.IPlaylistRepository;
 
 
@@ -31,8 +32,8 @@ public class DeletePlaylistCommand implements ICommand
 
             try
             {
-                PlayList playlist = playlistService.deletePlaylist(userId,playlistId);
-                System.out.println("Playlist ID: "+playlist.getId());
+                playlistService.deletePlaylist(userId,playlistId);
+                System.out.println("Playlist ID: "+playlistId);
 
             }
             catch(RuntimeException e)

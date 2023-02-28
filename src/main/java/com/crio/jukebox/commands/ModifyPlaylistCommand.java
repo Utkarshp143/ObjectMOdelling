@@ -5,19 +5,18 @@ import java.io.IOException;
 import com.crio.jukebox.entities.Song;
 import com.crio.jukebox.entities.PlayList;
 import com.crio.jukebox.repositories.ISongRepository;
+import com.crio.jukebox.services.IPlaylistService;
 import com.crio.jukebox.repositories.IPlaylistRepository;
 
 
 public class ModifyPlaylistCommand implements ICommand
 {   
-    private final ISongRepository songRepository;
-    private final IPlaylistRepository playlistRepository;
+    // private final ISongRepository songRepository;
+    // private final IPlaylistRepository playlistRepository;
     private final IPlaylistService playlistService;
 
-    public ModifyPlaylistCommand(ISongRepository songRepository, IPlaylistRepository playlistRepository,PlaylistService playlistService)
+    public ModifyPlaylistCommand(IPlaylistService playlistService)
     {
-        this.songRepository = songRepository;
-        this.playlistRepository = playlistRepository;
         this.playlistService = playlistService;
     
     }
@@ -61,7 +60,7 @@ public class ModifyPlaylistCommand implements ICommand
                     if(i != size-1)
                     {
                         System.out.print(" ");
-                        i++
+                        i++;
                     }
                 }
 
@@ -69,6 +68,11 @@ public class ModifyPlaylistCommand implements ICommand
 
 
             }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
        
+        }
     }
 }

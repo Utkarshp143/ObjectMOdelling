@@ -1,5 +1,7 @@
+package com.crio.jukebox.entities;
+
 public abstract class BaseEntity {
-    private final String id;
+    protected String id;
     
     public String getId() 
     {

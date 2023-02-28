@@ -1,6 +1,7 @@
 package com.crio.jukebox.repositories;
 
 
+import com.crio.codingame.entities.User;
 import com.crio.jukebox.entities.PlayList;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class PlaylistRepository implements IPlaylistRepository
         @Override
         public String getPlayingPlaylistId()
         {
-            this.playingPlaylistId;
+            return this.playingPlaylistId;
         }
 
         @Override
@@ -72,7 +73,7 @@ public class PlaylistRepository implements IPlaylistRepository
     }
 
     @Override
-    public void delete(User entity)
+    public void delete(PlayList entity)
     {
         playlistMap.remove(entity.getUserId());
     }    
@@ -91,16 +92,4 @@ public class PlaylistRepository implements IPlaylistRepository
     }
 
    
-
-    @Override
-    public Optional<PlayList> findByName(String name) {
-        PlayList playlist = null;
-        // List <User> result = new ArrayList<>();
-        for(Map.Entry<String,User> entry : playlistMap.entrySet()){
-            if(entry.getValue().getName() == name){
-                playlist = entry.getValue();
-            }
-        }
-        return Optional.ofNullable(playlist);
-    }
 }

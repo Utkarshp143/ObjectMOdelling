@@ -17,7 +17,7 @@ public class LoadDataCommand implements ICommand
     }
 
     @Override
-    public void execute(List<String> tokens) {
+    public void execute(List<String> tokens) throws IOException {
         String commandName = tokens.get(0);
         
         if(commandName.equals("LOAD-DATA"))

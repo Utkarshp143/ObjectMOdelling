@@ -27,7 +27,7 @@ public class PlaySongCommand implements ICommand
         {
             String userId = tokens.get(1);
             
-            PlayList playlist = playlistRepository.findById().get();
+            PlayList playlist = playlistRepository.findById(userId).get();
             List<Song> songList = playlist.getSongs();
 
             if(songList.size() != 0)
@@ -40,7 +40,7 @@ public class PlaySongCommand implements ICommand
 
 
                 System.out.println("Current song playing");
-                System.out.println("SongName: "+song.getName());
+                System.out.println("SongName: "+song.getSongName());
                 System.out.println("AlbumName: "+song.getAlbumName());
                 System.out.println("ArtistName: "+song.getAlbumArtistToString());
 

@@ -1,23 +1,31 @@
 package com.crio.jukebox.services;
 
 import com.crio.jukebox.repositories.IPlaylistRepository;
+import com.crio.jukebox.repositories.ISongRepository;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import com.crio.jukebox.entities.PlayList;
+import com.crio.jukebox.entities.Song;
+import com.crio.jukebox.exceptions.PlaylistNotFoundException;
+import com.crio.jukebox.exceptions.SongNotFoundException;
 
 public class PlaylistService implements IPlaylistService
 {
     private final IPlaylistRepository playlistRepository;
     private final ISongRepository songRepository;
 
-    public PlaylistService(IPlaylistRepository playlistRepository)
+    public PlaylistService(IPlaylistRepository playlistRepository,ISongRepository songRepository)
     {
         this.playlistRepository = playlistRepository;
+        this.songRepository = songRepository;
     }
 
     // doubt in converting songId to song
-    public PlayList createPlaylist(String userId, String playlistName, List<String> songId)
+    public PlayList createPlaylist(String userId, String playlistName, List<String> songId) throws SongNotFoundException
     {
         List<Song> songs = new ArrayList<>();
-        PlayList playlist = new PlayList(userId,playlistName,songId);
+        PlayList playlist = new PlayList(userId,playlistName,songs);
         playlist = playlistRepository.save(playlist);
 
         try{
@@ -32,7 +40,7 @@ public class PlaylistService implements IPlaylistService
         return playlist;
     }   
 
-    public void deletePlaylist(String userId, String playlistId)
+    public void deletePlaylist(String userId, String playlistId) throws PlaylistNotFoundException
     {
         if(!(playlistRepository.existsById(playlistId)))
         {

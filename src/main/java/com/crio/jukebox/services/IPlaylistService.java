@@ -1,7 +1,7 @@
 package com.crio.jukebox.services;
 
+import java.util.List;
 import com.crio.jukebox.entities.PlayList;
-import java.util.list;
 
 public interface IPlaylistService 
 {

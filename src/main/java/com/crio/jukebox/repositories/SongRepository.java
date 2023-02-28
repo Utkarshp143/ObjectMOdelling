@@ -1,9 +1,16 @@
 package com.crio.jukebox.repositories;
 
 
+import com.crio.codingame.entities.Question;
 import com.crio.jukebox.entities.Song;
-
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +48,25 @@ public class SongRepository implements ISongRepository
         return entity;
     }
 
+    
+    @Override
+    public void loadSongs(String filename) throws IOException
+    {
+       Path path = Paths.get(filename);
+       Charset sc = StandardCharsets.UTF_8;
+       
+       List<String> list = Files.readAllLines(path,sc);
+
+       for(String line : list)
+       {
+        String[] arr = line.split(",");
+        List<String> featuredArtist = Arrays.asList(arr[arr.length -1].split("#"));
+
+        Song song = new Song(arr[1],arr[2],arr[3],arr[4],featuredArtist);
+        
+        save(song);
+       }
+    }
     // TODO: CRIO_TASK_MODULE_SERVICES
     // Find all the list of Question Present in the Repository
     // Tip:- Use Java Streams
@@ -64,8 +90,9 @@ public class SongRepository implements ISongRepository
     }
 
     @Override
-    public void delete(Question entity) {
+    public void delete(Song entity) {
         // TODO Auto-generated method stub
+        
         
     }
 
@@ -84,7 +111,7 @@ public class SongRepository implements ISongRepository
         @Override
         public String getPlayingSongId()
         {
-            this.playingSongId;
+            return this.playingSongId;
         }
 
         @Override
@@ -93,22 +120,5 @@ public class SongRepository implements ISongRepository
             this.playingSongId = id;
         }
 
-        @Override
-        public void loadSongs(String filename) throws IOException
-        {
-           Path path = Paths.get(filename);
-           Charset sc = StandardCharsets.UTF_8;
-           
-           List<String> list = Files.readAllLines(path,sc);
-
-           for(String line : list)
-           {
-            String[] arr = line.split(",");
-            List<String> featuredArtist = Arrays.asList(arr[arr.length -1].split("#"));
-
-            Song song = new Song(arr[1],arr[2],arr[3],arr[4],featuredArtist);
-            
-            save(song);
-           }
-        }
+      
 }   

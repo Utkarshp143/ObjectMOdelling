@@ -1,3 +1,5 @@
+package com.crio.jukebox.entities;
+
 import java.util.*;
 
 public class User  extends BaseEntity
@@ -21,7 +23,7 @@ public class User  extends BaseEntity
         return userName;
     }
 
-    public List<Playlist> getPlaylists()
+    public List<PlayList> getPlaylists()
     {
         return playlists;
     }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.crio.jukebox.entities.Song;
 import com.crio.jukebox.entities.PlayList;
 import com.crio.jukebox.repositories.ISongRepository;
+import com.crio.jukebox.services.IPlaylistService;
 import com.crio.jukebox.repositories.IPlaylistRepository;
 
 

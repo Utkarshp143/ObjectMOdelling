@@ -30,7 +30,7 @@ public class UserRepository implements IUserRepository
     {
         if( entity.getId() == null ){
             autoIncrement++;
-            User u = new User(Integer.toString(autoIncrement),entity.getName());
+            User u = new User(Integer.toString(autoIncrement),entity.getUserName());
             userMap.put(u.getId(),u);
             return u;
         }
@@ -75,16 +75,4 @@ public class UserRepository implements IUserRepository
     }
 
    
-
-    @Override
-    public Optional<User> findByName(String name) {
-        User user = null;
-        // List <User> result = new ArrayList<>();
-        for(Map.Entry<String,User> entry : userMap.entrySet()){
-            if(entry.getValue().getName() == name){
-                user = entry.getValue();
-            }
-        }
-        return Optional.ofNullable(user);
-    }
 }

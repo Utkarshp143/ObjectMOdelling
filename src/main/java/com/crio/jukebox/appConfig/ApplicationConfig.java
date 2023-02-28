@@ -27,21 +27,19 @@ import com.crio.jukebox.services.UserService;
 
 public class ApplicationConfig 
 {
-    
-    ISongRepository songRepository = new SongRepository();
     IUserRepository userRepository = new UserRepository();
+    ISongRepository songRepository = new SongRepository();
     IPlaylistRepository playlistRepository = new PlaylistRepository();
 
-    ISongService songService = new SongService(songRepository);
+    ISongService songService = new SongService();
     IUserService userService = new UserService(userRepository);
-    IPlaylistService playlistService = new PlaylistService(playlistRepository);
+    IPlaylistService playlistService = new PlaylistService(playlistRepository, songRepository);
     
+    private final LoadDataCommand loadDataCommand = new LoadDataCommand(songRepository);
     private final CreateUserCommand createUserCommand = new CreateUserCommand(userService);
-    
     private final CreatePlaylistCommand playlistCommand = new CreatePlaylistCommand(playlistService);
     private final DeletePlaylistCommand deletePlaylistCommand = new DeletePlaylistCommand(playlistService);
-    private final LoadDataCommand loadDataCommand = new LoadDataCommand(songRepository);
-    private final ModifyPlaylistCommand modifyPlaylistCommand = new ModifyPlaylistCommand(songRepository,playlistRepository,playlistService);
+    private final ModifyPlaylistCommand modifyPlaylistCommand = new ModifyPlaylistCommand(playlistService);
     private final PlayPlaylistCommand playPlaylistCommand = new PlayPlaylistCommand(songRepository,playlistRepository);
     private final PlaySongCommand playSongCommand = new PlaySongCommand(songRepository,playlistRepository);
 
@@ -52,7 +50,7 @@ public class ApplicationConfig
     {
         commandInvoker.register("LOAD-DATA",loadDataCommand);
         commandInvoker.register("CREATE-USER",createUserCommand);
-        commandInvoker.register("CREATE-PLAYLIST",CreatePlaylistCommand);
+        commandInvoker.register("CREATE-PLAYLIST",playlistCommand);
         commandInvoker.register("DELETE-PLAYLIST",deletePlaylistCommand);
         commandInvoker.register("MODIFY-PLAYLIST",modifyPlaylistCommand);
         commandInvoker.register("PLAY-PLAYLIST",playPlaylistCommand);

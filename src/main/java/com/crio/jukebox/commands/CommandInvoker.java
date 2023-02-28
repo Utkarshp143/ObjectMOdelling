@@ -1,5 +1,6 @@
 package com.crio.jukebox.commands;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class CommandInvoker
     }
 
     // Execute the registered Command
-    public void executeCommand(String commandName, List<String> tokens) throws NoSuchCommandException {
+    public void executeCommand(String commandName, List<String> tokens) throws NoSuchCommandException, IOException {
         ICommand command = get(commandName);
         if(command == null){
             // Handle Exception

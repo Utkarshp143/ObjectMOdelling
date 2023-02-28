@@ -1,3 +1,8 @@
+package com.crio.jukebox.entities;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Song extends BaseEntity
 {
     private final String songName;
@@ -17,8 +22,9 @@ public class Song extends BaseEntity
 
     public Song(String id,String name,String genre,String albumName,String albumArtist,List<String> featuredArtist)
     {
-        this.id = id;
         this(name, genre, albumName, albumArtist, featuredArtist);
+        this.id = id;
+        
     }    
 
     public String getSongName()

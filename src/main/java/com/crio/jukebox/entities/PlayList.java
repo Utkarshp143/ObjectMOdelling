@@ -1,3 +1,7 @@
+package com.crio.jukebox.entities;
+
+import java.util.List;
+
 public class PlayList extends BaseEntity
 {
     private final String playlistName;
@@ -13,8 +17,9 @@ public class PlayList extends BaseEntity
 
     public PlayList(String id,String userId,String playlistName,List<Song> songs)
     {
-        this.id = id;
         this(userId, playlistName, songs);
+        this.id = id;
+        
     }
     public String getPlaylistName()
     {
