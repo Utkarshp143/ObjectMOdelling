@@ -90,13 +90,6 @@ public class ContestService implements IContestService {
             return contestRepository.findAllContestLevelWise(level);
         }
 
-        // for(Map.Entry<String,Contest> entry : contestMap.entrySet()){
-        //     if(entry.getValue().getLevel().equals((level))){
-        //         contestList.add(entry.getValue());
-        //     }
-        // }
-        // return contestList;
-    
     }
 
     @Override

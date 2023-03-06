@@ -1,7 +1,7 @@
 package com.crio.codingame.repositories;
 
-import java.util.ArrayList;
-import java.util.Collections;
+// import java.util.ArrayList;
+// import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,9 +44,9 @@ public class ContestRepository implements IContestRepository {
     // Tip:- Use Java Streams
 
     @Override
-    public List<Contest> findAll() {
-        List<Contest> result = new ArrayList<>(contestMap.values());
-        return result;
+    public List<Contest> findAll()
+    {
+        return (List<Contest>)(contestMap.values());        
     }
 
     @Override
@@ -57,11 +57,12 @@ public class ContestRepository implements IContestRepository {
     @Override
     public boolean existsById(String id) {
         // TODO Auto-generated method stub
-        return false;
+        return contestMap.containsKey(id) ? true : false;
     }
 
     @Override
     public void delete(Contest entity) {
+        contestMap.remove(entity.getId());
         // TODO Auto-generated method stub
         
     }
@@ -69,6 +70,10 @@ public class ContestRepository implements IContestRepository {
     @Override
     public void deleteById(String id) {
         // TODO Auto-generated method stub
+        if(contestMap.containsKey(id))
+        {
+            contestMap.remove(id);
+        }
         
     }
 
@@ -84,18 +89,13 @@ public class ContestRepository implements IContestRepository {
 
     @Override
     public List<Contest> findAllContestLevelWise(Level level) {
-        if(level == Level.LOW){
-            // return contestMap.keySet().stream().
-            return contestMap.values().stream().filter(entity -> entity.getLevel() == level).collect(Collectors.toList());
-        }
-        else if(level == Level.MEDIUM){
-            return contestMap.values().stream().filter(entity -> entity.getLevel() == level).collect(Collectors.toList());
-
+        if(level == null){
+            return (List<Contest>)(contestMap.values());
+            // return contestMap.values().stream().filter(entity -> entity.getLevel() == level).collect(Collectors.toList());
         }
         else {
             return contestMap.values().stream().filter(entity -> entity.getLevel() == level).collect(Collectors.toList());
         }
-//     return Collections.emptyList();
     }
     
 }

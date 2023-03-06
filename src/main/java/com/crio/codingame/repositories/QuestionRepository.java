@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+import javax.swing.text.html.parser.Entity;
 import com.crio.codingame.entities.Level;
 import com.crio.codingame.entities.Question;
 
@@ -56,17 +56,21 @@ public class QuestionRepository implements IQuestionRepository {
     @Override
     public boolean existsById(String id) {
         // TODO Auto-generated method stub
-        return false;
+        return questionMap.containsKey(id) ? true : false;
     }
 
     @Override
     public void delete(Question entity) {
+        questionMap.remove(entity.getId());
         // TODO Auto-generated method stub
-        
     }
 
     @Override
     public void deleteById(String id) {
+        if(questionMap.containsKey(id))
+        {
+            questionMap.remove(id);
+        }
         // TODO Auto-generated method stub
         
     }
